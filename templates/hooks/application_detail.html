@@ -1,0 +1,40 @@
+{% extends 'hooks/base.html' %}
+{% load staticfiles %}
+
+{% block html_id %}items{% endblock %}
+{% block head_title %} Mis hooks {% endblock %}
+{% block page_title %} Mis hooks {% endblock %}
+
+{% block app_js %}
+<script type="text/javascript" src="{% static '/hooks/js/app/controllers/application-detail-ctrl.js' %}"></script>
+{% endblock %}
+
+{% block page_body_content %}
+<div ng-controller="ApplicationDetailCtrl" ng-init="initDetail()">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="panel panel-default" ng-repeat="hook in application.hooks">
+                <div class="panel-heading">
+                    <div class="row">
+                        <div class="col-lg-10">
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="input-group">
+                                        <input type="text" class="input-readonly" size="50" ng-model="hook.name" readonly>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-2">
+                            <button ng-click="removeHook(hook.id)" class="btn btn-danger pull-right button-edit"><i class="fa fa-remove fa-fw"></i></button>
+                            <button ng-click="editHook(hook.id)" class="btn btn-default pull-right button-edit"><i class="fa fa-edit fa-fw"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <button ng-click="newHook()" class="btn btn-default pull-right">Añadir nuevo hook</button>
+        </div>
+    </div>
+</div>
+{% endblock %}

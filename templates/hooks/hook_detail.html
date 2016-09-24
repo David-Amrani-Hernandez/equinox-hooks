@@ -1,0 +1,100 @@
+{% extends 'hooks/base.html' %}
+{% load staticfiles %}
+{% block html_id %}item-detail{% endblock %}
+{% block head_title %} Detalle del Hook {% endblock %}
+{% block page_title %}  Hook Detail {% endblock %}
+{% block app_js %}
+<script type="text/javascript" src="{% static '/hooks/js/app/controllers/hook-detail-ctrl.js' %}"></script>
+{% endblock %}
+{% block page_body_content %}
+<form ng-controller="HookDetailCtrl" ng-submit="saveItem()" ng-init="initDetail()">
+    {% csrf_token %}
+    <div class="row">
+        <div class="col-lg-6">
+            <div class="form-group">
+                <input class="form-control" ng-model="hook.name" placeholder="Nombre">
+            </div>
+            <div class="form-group">
+                <textarea rows="3" cols="40" ng-model="hook.description" class="form-control" placeholder="Descripción"></textarea>
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <div class="form-group">
+                <toggle-switch
+                  ng-model="hook.latch_status">
+                </toggle-switch>
+                </select>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+            <h2>Request</h2>
+            <div class="form-group">
+                <select class="form-control" id="category-tag-select"  ng-model="hook.method"
+                        ng-options="method.value as method.name for method in methods">
+                    <option value="" disabled selected>Selecciona un método</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <input class="form-control" ng-model="hook.url" placeholder="Url">
+            </div>
+            <div class="form-group">
+                <input class="form-control" ng-model="hook.headers" placeholder="Headers">
+            </div>
+            <div class="form-group">
+                <textarea rows="3" cols="40" ng-model="hook.body" class="form-control" placeholder="Body"></textarea>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+            <h2>Save response</h2>
+            <div class="form-group">
+                <input class="form-control" ng-model="hook.regex" placeholder="Regex">
+            </div>
+        </div>
+    </div>
+    <div ng-if="hook.url">
+
+   <div  class="row">
+        <div class="col-lg-12">
+            <h2>Request 2</h2>
+            <div class="form-group">
+                <select class="form-control" id="category-tag-select"  ng-model="hook.method2"
+                        ng-options="method.value as method.name for method in methods">
+                    <option value="" disabled selected>Selecciona un método</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <input class="form-control" ng-model="hook.url2" placeholder="Url">
+            </div>
+            <div class="form-group">
+                <input class="form-control" ng-model="hook.headers2" placeholder="Headers">
+            </div>
+            <div class="form-group">
+                <textarea rows="3" cols="40" ng-model="hook.body2" class="form-control" placeholder="Body"></textarea>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+            <h2>Save response 2</h2>
+            <div class="form-group">
+                <input class="form-control" ng-model="hook.regex2" placeholder="Regex">
+            </div>
+        </div>
+    </div>
+
+    </div>
+
+
+    <div class="row">
+        <div class="col-lg-12">
+            <button ng-click="saveHook(hook.name, hook.description, hook.latch_status, hook.method, hook.url, hook.body, hook.regex, hook.method2, hook.url2, hook.body2, hook.regex2, application.id)"
+                    type="submit" class="btn btn-default">Guardar</button>
+            <button type="reset" class="btn btn-default">Limpiar informacion</button>
+        </div>
+    </div>
+</form>
+{% endblock %}

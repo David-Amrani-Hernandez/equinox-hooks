@@ -1,0 +1,108 @@
+{% extends 'hooks/base.html' %}
+{% load staticfiles %}
+
+{% block html_id %}items{% endblock %}
+{% block head_title %} Mis aplicaciones {% endblock %}
+{% block page_title %} Mis aplicaciones {% endblock %}
+
+{% block app_js %}
+<script type="text/javascript" src="{% static '/hooks/js/app/controllers/applications-ctrl.js' %}"></script>
+{% endblock %}
+
+{% block page_body_content %}
+<div ng-controller="ApplicationCtrl" ng-init="initList()">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="panel panel-default" ng-repeat="application in applications">
+                <div class="panel-heading">
+                    <div class="row">
+                        <div class="col-lg-10">
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="input-group">
+                                        <input type="text" class="input-readonly" size="50" ng-model="application.name">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="input-group">
+                                        <span style="width: 150px" class="input-group-addon" id="app-id">Application ID</span>
+                                        <input id="app-id" type="text" class="form-control"  size="50" ng-model="application.app_id" >
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="input-group">
+                                        <span style="width: 150px" class="input-group-addon" id="secret">Secreto</span>
+                                        <input id="secret" type="text" class="form-control" size="50" ng-model="application.secret" >
+                                    </div>
+                                </div>
+                            </div>
+                            <div style="margin-top: 10px" class="row">
+                                <div class="col-lg-12">
+                                    <div ng-if="application.account_id == null" class="input-group">
+                                        <span style="width: 150px" class="input-group-addon" id="secret">Token</span>
+                                        <input style="width: 200px" type="text" class="form-control" size="50" ng-model="token" >
+                                        <span style="width: 20px;" class="input-group-btn">
+                                            <button title="Parear" ng-click="pairApplication(application.id, token)" class="btn btn-info"><i class="glyphicon glyphicon-link"></i></button>
+                                        </span>
+                                    </div>
+                                    <div ng-if="application.account_id != null" class="input-group">
+                                        <button ng-click="unpairApplication(application.id)" class="btn btn-warning">Desparear</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-2">
+                            <button ng-click="removeApplication(application.id)" class="btn btn-danger pull-right button-edit"><i class="fa fa-remove fa-fw"></i></button>
+                            <button ng-click="changeApplication(application.id)" class="btn btn-default pull-right button-edit"><i class="fa fa-plus-square fa-fw"></i></button>
+                            <button title="Guardar" ng-click="saveApplication(application.id, application.name, application.app_id, application.secret)" class="btn btn-primary pull-right button-edit"><i class="fa fa-save fa-fw"></i></button>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="panel panel-default" ng-if="show_new_application">
+                <div class="panel-heading">
+                    <div class="row">
+                        <div class="col-lg-10">
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="input-group">
+                                        <input type="text" class="input-readonly" size="50" ng-model="new_application.name">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="input-group">
+                                        <span style="width: 150px" class="input-group-addon" id="app-id">Application ID</span>
+                                        <input id="app-id" type="text" class="form-control"  size="50" ng-model="new_application.app_id" >
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="input-group">
+                                        <span style="width: 150px" class="input-group-addon" id="secret">Secreto</span>
+                                        <input id="secret" type="text" class="form-control" size="50" ng-model="new_application.secret" >
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-2">
+                            <button title="Cancelar" ng-click="cancelNewRestaurant()" class="btn btn-danger pull-right button-edit"><i class="fa fa-remove fa-fw"></i></button>
+                            <button title="Guardar" ng-click="createApplication(new_application.name, new_application.app_id, new_application.secret)" class="btn btn-primary pull-right button-edit"><i class="fa fa-save fa-fw"></i></button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <button ng-click="newApplication()" class="btn btn-default pull-right">Añadir nueva aplicación</button>
+        </div>
+    </div>
+</div>
+{% endblock %}

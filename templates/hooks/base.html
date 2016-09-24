@@ -1,0 +1,116 @@
+{% load staticfiles %}
+{% load i18n %}
+
+<!DOCTYPE html>
+<html lang="en" id="{% block html_id %}base{% endblock %}">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>{% block head_title %}My site title{% endblock %}</title>
+
+    <link rel="stylesheet" href="{% static '/hooks/css/angular-toggle-switch-bootstrap-3.css' %}" >
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="{% static '/hooks/css/bootstrap.min.css' %}" >
+    <!-- Timeline CSS -->
+    <link rel="stylesheet" href="{% static '/hooks/css/timeline.css' %}">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{% static '/hooks/css/sb-admin-2.css' %}">
+    <!-- Morris Charts CSS -->
+    <link rel="stylesheet" href="{% static '/hooks/css/morris.min.css' %}">
+    <!-- Custom Fonts -->
+    <link rel="stylesheet" href="{% static '/hooks/css/font-awesome.min.css' %}">
+    <link rel="stylesheet" href="{% static '/hooks/css/xtyle.css' %}">
+
+    <link rel="stylesheet" href="{% static '/hooks/css/alleat.css' %}">
+
+    <!-- ui-notification CSS -->
+    <link rel="stylesheet" href="{% static '/hooks/css/angular-ui-notification.css' %}">
+
+    {% block extra_css %}{% endblock %}
+
+    <script type="text/javascript" src="{% static '/hooks/js/angular.min.js' %}"></script>
+    <script type="text/javascript" src="{% static '/hooks/js/angular-cookies.min.js' %}"></script>
+    <script type="text/javascript" src="{% static '/hooks/js/angular-animate.min.js' %}"></script>
+    <script type="text/javascript" src="{% static '/hooks/js/angular-route.min.js' %}"></script>
+    <script type="text/javascript" src="{% static '/hooks/js/ui-bootstrap-tpls-1.2.5.min.js' %}"></script>
+    <!-- ui-notification JS -->
+    <script type="text/javascript" src="{% static '/hooks/js/angular-ui-notification.min.js' %}"></script>
+
+
+    <script type="text/javascript" src="{% static '/hooks/js/app/app.js' %}"></script>
+    <script type="text/javascript" src="{% static '/hooks/js/app/directives/ng-switch.js' %}"></script>
+
+    <script type="text/javascript" src="{% static '/hooks/js/app/services.js' %}"></script>
+
+    {% block app_js %}{% endblock %}
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+
+<body ng-app="equinoxApp">
+
+    <div id="wrapper">
+
+        <!-- Navigation -->
+        <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="sr-only">Togglon</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="/">Latch Hooker</a>
+            </div>
+            <!-- /.navbar-header -->
+
+            {% include 'hooks/includes/top_menu.html' %}
+
+            <div class="navbar-default sidebar" role="navigation">
+                <div class="sidebar-nav navbar-collapse">
+                    {% include 'hooks/includes/menu.html' %}
+                </div>
+                <!-- /.sidebar-collapse -->
+            </div>
+            <!-- /.navbar-static-side -->
+        </nav>
+
+        <div id="page-wrapper">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h1 class="page-header">{% block page_title %}My page title{% endblock %}</h1>
+                </div>
+                <!-- /.col-lg-12 -->
+            </div>
+            {% block page_body_content %}{% endblock %}
+        </div>
+        <!-- /#page-wrapper -->
+
+    </div>
+    <!-- /#wrapper -->
+
+
+    <!-- jQuery Version 1.11.0 -->
+    <script type="text/javascript" src="{% static '/hooks/js/jquery.min.js' %}"></script>
+    <!-- Bootstrap Core JavaScript -->
+    <script type="text/javascript" src="{% static '/hooks/js/bootstrap.min.js' %}"></script>
+    <script type="text/javascript" src="{% static '/hooks/js/metisMenu.min.js' %}"></script>
+
+    <!-- Custom Theme JavaScript -->
+    <script type="text/javascript" src="{% static '/hooks/js/sb-admin-2.js' %}"></script>
+
+    {% block extra_js %}{% endblock %}
+
+</body>
+
+</html>
